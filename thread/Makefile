@@ -1,7 +1,7 @@
-thread_pool:thread_pool.c
-	gcc -o $@ $^ -lpthread
+thread7:thread7.c
+	gcc -o $@ $^ -lpthread  -g
 
 .PHONY:clean
 
 clean:
-	rm -f thread_pool
+	rm -f thread7

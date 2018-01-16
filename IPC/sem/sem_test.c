@@ -4,6 +4,9 @@ int main()
 {
 	int semid = creatSems(1);
 	initSems(semid,0,1);
+    int value = 0;
+    GetSemValue(semid, 0,&value);
+    printf("%d\n",  value);
 	pid_t pid = fork();
 
 	//initSems(smid,0,1);

@@ -1,9 +1,7 @@
 #include<iostream>
-
+#include<string>
 #include<vector>
-
 #include<map>
-
 #include<unordered_map>
 
 //#include<algorithm>
@@ -69,10 +67,10 @@ int LessKSubArray(vector<size_t>& arr,int k)
     size_t ret = 0;
     for(size_t i = 0; i < arr.size(); ++i){
         prod *= arr[i];
-        while(prod > k){
+        while(prod >= k){
             prod /= arr[left++];
         }
-        ret++;//= i - left + 1;
+        ret += i - left + 1;
     }
     return ret;
 }
@@ -87,9 +85,7 @@ int main()
     int brr[] = {1,2,2,3,4,2,5};
     vector<int> v(brr, brr+sizeof(brr)/sizeof(int));
     cout<<pivotIndex(nums)<<endl;
-    cout<<FindShortestSubArray(v)<<endl;
-    size_t crr[] = {10,5,2,6};
-    vector<size_t> v1(crr, crr+sizeof(crr)/sizeof(int));
-    cout<<LessKSubArray(v1,100)<<endl;
-    return 0; 
+    int crr[] = {10,5,2,6};
+    vector<size_t> v1(crr, crr+sizeof(crr)/sizeof(size_t);
+    cout<<LessSubKArray(v1,100)<<endl; 
 }

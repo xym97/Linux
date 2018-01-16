@@ -1,14 +1,12 @@
-.PHONY:all
-
 all: client server
 
-client:client_fifo.c
+client:client.c
 	gcc -o $@ $^
 
-server:server_fifo.c
+server:server.c
 	gcc -o $@ $^
 
 .PHONY:clean
-
 clean:
-	rm -f client server mypipe
+	rm -f client server
+

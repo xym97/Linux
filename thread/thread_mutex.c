@@ -9,8 +9,9 @@ void* ThreadEntry(void* arg)
 {
     (void*) arg;
     size_t i = 0; 
-    for(; i < 500000000; i++){
+    for(; i < 50000; i++){
     pthread_mutex_lock(&lock);    
+    pthread_mutex_lock(&lock); //当加锁后调用的层层函数中可能会不小心搞一个加锁操作 （死锁情况1）  
         ++count;
     pthread_mutex_unlock(&lock);
     }

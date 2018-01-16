@@ -7,7 +7,7 @@ int ComMsgQueue(int flag)
 		perror("ftok");
 		return -1;
 	}
-	int msgid = msgget(key,flag|0666);
+	int msgid = msgget(key,flag|0666);//0666  拥有者  组  和其他  三种身份都可以读写
 	if(msgid < 0){
 		perror("msgget");
 		return -2;
@@ -17,7 +17,7 @@ int ComMsgQueue(int flag)
 
 int CreatMsgQueue()
 {
-	return ComMsgQueue(IPC_CREAT|IPC_EXCL);
+	return ComMsgQueue(IPC_CREAT|IPC_EXCL);//  IPC_CREAT 不存在创建一个msgqueue 存在返回key  IPC_CREAT|IPC_EXCL 不存在创建 存在了就退出  
 }
 
 int GetMsgQueue()
@@ -34,11 +34,15 @@ int DestoryMsgQueue(int msgid)
 	return 0;
 }
 
-int sendMsg(int msgid, int type, char* sendmsg)
+int sendMsg(int msgid, int type, char* sendmsg, size_t size)
 {
 	struct msgbuf _mb;
 	_mb.mytype = type;
-	strcpy(_mb.mytext,sendmsg);
+    if(size > sizeof(_mb.mytext) - 1){
+        printf("max_size too big");
+        return -1;
+    }
+    strcpy(_mb.mytext,sendmsg);
 	if(msgsnd(msgid,&_mb,sizeof(_mb.mytext),0) < 0){
 		perror("msgsnd");
 		return -1;

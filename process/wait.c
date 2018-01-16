@@ -14,15 +14,15 @@ int main()
             printf("I am Child pid:%d, ppid:%d,g_val:%d,&g_val:%p \n",\
                getpid(),getppid(),g_val,&g_val);
             sleep(3);
-            exit(123);
+            //exit(123);
         }
-        //exit(1);
+        exit(1);
     }else if(id > 0){
         //sleep(2);
         printf("I am Father pod:%d, ppid:%d, g_avl:%d, &g_val:%p \n",\
                getpid(), getppid(),g_val,&g_val);
     }else{
-        perror("vfork");
+        perror("fork");
     }
     int status = 0;
     do{
@@ -33,11 +33,9 @@ int main()
         }else if(ret > 0){
             if(WIFEXITED(status)){
                 printf("child running done exit code : %d \n",WEXITSTATUS(status));
-            }else{
-                printf("child is quit, but it is killed");
+            }else if(WIFSIGNALED(status)){
+                printf("child is quit, but it is killed SIG : %d\n",WTERMSIG(status));
             }
-           // printf("wait success! , ret: %d, status : %d exit code: %d, sig : %d\n"\
-           //  ,ret, status, (status >> 8)&0xff,status&0xff);
             break;
         }else{
             printf("wait failed!\n");
@@ -46,7 +44,12 @@ int main()
     }while(1);
    // pid_t ret = waitpid(id,&status,0);
    // if(ret > 0){
-   //
+   //    printf("ret:%d, status :%d, exit code: %d, sig: %d\n",ret, status, (status >> 8)&0xff, (status)&0xff);             
+   //            
+   // }
+   // pid_t ret = wait(&status);
+   // if(ret > 0){
+   //     printf(" wait success ret : %d status :%d\n", ret, status);
    // }
     return 0;
 }

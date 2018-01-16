@@ -1,8 +1,7 @@
 
-
-exec:exec.c
-	gcc -o exec exec.c
+myshell:myshell.c
+	gcc -o  myshell myshell.c
 
 .PHONY:clean
 clean:
-		rm -f exec
+		rm -f myshell

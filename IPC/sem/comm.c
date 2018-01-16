@@ -36,7 +36,18 @@ int initSems(int semid, int which, int value)
 		perror("initSems");
 		return -1;
 	}
-	return 0;
+	return ret; 
+}
+
+int GetSemValue(int semid, int index, int* value)
+{
+    int ret = semctl(semid, index, GETVAL);
+    if(ret < 0){
+        perror("semctl");
+        return -1;
+    }
+    *value = ret;
+    return ret;
 }
 
 static int comSemOp(int semid, int which, int op)

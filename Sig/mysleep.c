@@ -15,13 +15,22 @@ void MySleep(int second)
     sigemptyset(&new_action.sa_mask);
     new_action.sa_flags = 0;
     sigaction(SIGALRM, &new_action, &old_action);
+    //
+    sigset_t new_block , old_block;
+    sigemptyset(&new_block);
+    sigaddset(&new_block, SIGALRM);
+    sigprocmask(SIG_BLOCK, &new_block, &old_block);
+   
     //2. 调用alarm函数， N秒之后， 系统会自动发送 SIGALRM
     alarm(second);
+    sigset_t suspend_mask = old_block;
+    sigdelset(&suspend_mask, SIGALRM);
+    sigsuspend(&suspend_mask);
     //调用 pause（）；
-    pause();
+    //pause();
     //恢复之前的信号处理方式
+    sigprocmask(SIG_BLOCK, &old_block, NULL);
     sigaction(SIGALRM, &old_action, NULL);
-    
 }
 
 int main()

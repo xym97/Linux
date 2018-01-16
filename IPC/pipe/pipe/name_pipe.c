@@ -23,6 +23,7 @@ int main()
 			masg = "I am Child!";
 			write(_pipe[1],masg,strlen(masg) + 1);
 	        sleep(1); 
+        }
     }
      else if( 0 < pid){
         //Father

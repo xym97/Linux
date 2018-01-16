@@ -5,7 +5,7 @@
 void Func()
 {
     printf("Func Runing!\n");
-    exit(1);
+    //exit(1);
 }
 
 void Funcc()
@@ -15,10 +15,11 @@ void Funcc()
 
 int main()
 {
-    //Func();
-    //atexit(Funcc);//call user self-define clean Func and than  exit process 
-    //printf("Func Done!\n");
+    Func();
+    atexit(Funcc);//call user self-define clean Func and than  exit process 
+    printf("Func Done!\n");
     printf("main Done!");
-    _exit(0);
-    //return 0;
+   // _exit(0);
+    exit(0); 
+   //return 0;
 }

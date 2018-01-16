@@ -1,8 +1,8 @@
-mysleep : mysleep.c
-	gcc -o $@  $^
+sigchld : sigchld.c
+	gcc -g -o $@  $^
 
 .PHONY:clean
 
 clean:
-	rm -f mysleep
+	rm -f sigchld
 

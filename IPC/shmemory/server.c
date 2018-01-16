@@ -9,8 +9,8 @@ int main()
 	sleep(5);
 	int count = 0;
 	while(count < 20){
-		buf[count++] = 'a' + count;
-		buf[count] = '\0';
+		buf[count] = 'a' + count;
+		buf[++count] = '\0';
 		
 		sleep(1);
 	}

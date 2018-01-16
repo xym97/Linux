@@ -20,7 +20,7 @@ struct msgbuf{
 int CreatMsgQueue();
 int DestoryMagQueue(int msgid);
 int GetMsgQueue();
-int sendMsg(int msgid, int type , char* sendmsg);
+int sendMsg(int msgid, int type , char* sendmsg, size_t size);
 int recvMsg(int msgid, int type, char* recvmsg);
 
 #endif
